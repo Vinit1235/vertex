@@ -95,27 +95,6 @@ export default function About() {
             ))}
           </div>
         </motion.div>
-
-        {/* Image Placeholder */}
-        <motion.div
-          className="mt-20 glass-dark rounded-2xl p-8 text-center"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={inView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ delay: 0.5 }}
-        >
-          <div className="aspect-video bg-gradient-to-br from-red-900/30 to-black rounded-xl flex items-center justify-center border border-red-900/30">
-            <div className="text-center p-8">
-              <p className="text-6xl mb-4">🎬</p>
-              <p className="text-gray-400 text-lg mb-2">Event Promo Video</p>
-              <p className="text-gray-600 text-sm max-w-md mx-auto">
-                [IMAGE PROMPT: Cinematic hackathon promo video thumbnail, 
-                80s retro neon style, diverse group of hackers coding together, 
-                red and blue lighting, Stranger Things inspired atmosphere, 
-                glowing computer screens in dark room]
-              </p>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

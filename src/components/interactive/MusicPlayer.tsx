@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
 import { useTheme } from '../../context/ThemeContext';
-import { Music, Volume2, VolumeX, Radio, Play, Pause, SkipForward, SkipBack } from 'lucide-react';
+import { Music, Volume2, VolumeX, Radio, Play, Pause, SkipForward, SkipBack, Minus, X } from 'lucide-react';
 
 // Radio stations with streaming URLs
 const RADIO_STATIONS = [
@@ -161,12 +161,28 @@ export default function MusicPlayer() {
                 <Music className="w-5 h-5 text-red-500" />
                 <span className="font-retro text-sm text-red-400">HAWKINS RADIO</span>
               </div>
-              <button 
-                onClick={() => setIsOpen(false)}
-                className="text-gray-400 hover:text-white"
-              >
-                ×
-              </button>
+              <div className="flex items-center gap-2">
+                <button 
+                  onClick={() => setIsOpen(false)}
+                  className="text-gray-400 hover:text-white p-1 hover:bg-white/10 rounded"
+                  title="Minimize"
+                >
+                  <Minus className="w-4 h-4" />
+                </button>
+                <button 
+                  onClick={() => {
+                    setIsOpen(false);
+                    if (audioRef.current) {
+                      audioRef.current.pause();
+                      setIsPlaying(false);
+                    }
+                  }}
+                  className="text-gray-400 hover:text-red-400 p-1 hover:bg-white/10 rounded"
+                  title="Close & Stop"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
             </div>
 
             {/* Visualizer */}
