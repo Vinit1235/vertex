@@ -83,7 +83,7 @@ export default function TelekinesisMode() {
       {/* Activation Button */}
       <motion.button
         onClick={() => setIsActive(!isActive)}
-        className={`fixed bottom-24 right-4 z-50 px-4 py-2 rounded-full glass-dark ${
+        className={`fixed bottom-24 right-6 z-40 px-4 py-2 rounded-full glass-dark ${
           isActive ? 'ring-2 ring-pink-500' : ''
         }`}
         whileHover={{ scale: 1.1 }}

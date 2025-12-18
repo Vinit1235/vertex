@@ -79,7 +79,7 @@ export default function HawkinsMap() {
       {/* Map Toggle Button */}
       <motion.button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-4 right-4 z-50 px-4 py-2 rounded-full glass-dark flex items-center gap-2"
+        className="fixed bottom-40 left-6 z-50 px-4 py-2 rounded-full glass-dark flex items-center gap-2"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >

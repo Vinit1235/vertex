@@ -118,7 +118,7 @@ export default function CharacterSelect({ onSelect, onClose, isModal = false }: 
       {!isModal && (
         <motion.button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-72 right-4 z-50 px-4 py-2 rounded-full glass-dark flex items-center gap-2"
+          className="fixed bottom-72 right-6 z-40 px-4 py-2 rounded-full glass-dark flex items-center gap-2"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >

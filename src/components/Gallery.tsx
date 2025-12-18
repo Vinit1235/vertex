@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Play } from 'lucide-react';
 // Theme toggle only affects Hero section
 
 // Import images
@@ -9,6 +9,9 @@ import eventImg1 from '../images/Gemini_Generated_Image_6gu0cw6gu0cw6gu0.png';
 import eventImg2 from '../images/Gemini_Generated_Image_gshc50gshc50gshc.png';
 import eventImg3 from '../images/Gemini_Generated_Image_wgfozxwgfozxwgfo.png';
 import eventImg4 from '../images/Gemini_Generated_Image_x7dn4ex7dn4ex7dn.png';
+import eventImg5 from '../images/Gemini_Generated_Image_dvevzadvevzadvev.png';
+import eventImg6 from '../images/Gemini_Generated_Image_uqp173uqp173uqp1.png';
+import promoVideo from '../images/Cinematic hackathon promo video.png';
 
 interface GalleryImage {
   id: number;
@@ -49,31 +52,17 @@ const galleryImages: GalleryImage[] = [
   },
   {
     id: 5,
-    src: eventImg1,
+    src: eventImg5,
     title: "Award Ceremony",
     category: "Ceremony",
     aspectRatio: "aspect-video"
   },
   {
     id: 6,
-    src: eventImg2,
+    src: eventImg6,
     title: "Networking Lounge",
     category: "Lounge",
     aspectRatio: "aspect-video"
-  },
-  {
-    id: 7,
-    src: eventImg3,
-    title: "Workshop Session",
-    category: "Workshop",
-    aspectRatio: "aspect-video"
-  },
-  {
-    id: 8,
-    src: eventImg4,
-    title: "Team Collaboration",
-    category: "Teamwork",
-    aspectRatio: "aspect-square"
   },
 ];
 
@@ -183,6 +172,61 @@ export default function Gallery() {
           </AnimatePresence>
         </motion.div>
 
+        {/* Promo Video Section */}
+        <motion.div
+          className="mt-16 mb-12"
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.3 }}
+        >
+          <div className="text-center mb-8">
+            <span className="text-red-500 font-retro text-sm tracking-widest">
+              WATCH NOW
+            </span>
+            <h3 className="text-2xl md:text-3xl font-bold text-white mt-2">
+              PROMO VIDEO
+            </h3>
+          </div>
+          
+          <div className="relative max-w-4xl mx-auto rounded-2xl overflow-hidden group cursor-pointer">
+            {/* Video Thumbnail */}
+            <img 
+              src={promoVideo}
+              alt="VORTEX 2025 Promo Video"
+              className="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            
+            {/* Dark Overlay */}
+            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-all" />
+            
+            {/* Play Button */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <motion.div
+                className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-red-600 flex items-center justify-center shadow-lg shadow-red-500/50"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                animate={{ 
+                  boxShadow: ['0 0 20px rgba(239, 68, 68, 0.5)', '0 0 40px rgba(239, 68, 68, 0.8)', '0 0 20px rgba(239, 68, 68, 0.5)']
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <Play size={32} className="text-white ml-1" fill="white" />
+              </motion.div>
+            </div>
+            
+            {/* Video Title */}
+            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
+              <h4 className="text-white font-bold text-lg md:text-xl">VORTEX 2025 - Enter the Upside Down</h4>
+              <p className="text-gray-300 text-sm">Official Event Promo • 2:30</p>
+            </div>
+
+            {/* Corner Badge */}
+            <div className="absolute top-4 left-4 px-3 py-1 bg-red-600 rounded-full text-white text-xs font-bold">
+              🎬 CINEMATIC
+            </div>
+          </div>
+        </motion.div>
+
         {/* CTA */}
         <motion.div
           className="text-center mt-12 glass-dark rounded-xl p-8"
@@ -197,7 +241,7 @@ export default function Gallery() {
           </p>
           <motion.a
             href="#register"
-            className="inline-block px-8 py-3 bg-red-600 text-white rounded-lg font-bold"
+            className="inline-block px-8 py-4 bg-gradient-to-r from-red-600 to-red-500 text-white rounded-lg font-bold shadow-lg shadow-red-500/30 hover:shadow-red-500/50 transition-shadow"
             whileHover={{ scale: 1.05 }}
           >
             Register Now

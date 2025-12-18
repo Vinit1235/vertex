@@ -164,7 +164,7 @@ export default function ChatBot() {
       <motion.button
         onClick={() => setIsOpen(true)}
         className={`
-          fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full
+          fixed bottom-6 left-6 z-50 w-14 h-14 rounded-full
           ${isUpsideDown ? 'bg-red-900/80' : 'bg-gradient-to-r from-red-600 to-red-500'}
           backdrop-blur-sm border border-red-500/30
           flex items-center justify-center
@@ -191,7 +191,7 @@ export default function ChatBot() {
             initial={{ opacity: 0, y: 20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            className="fixed bottom-6 right-6 z-50 w-96 max-w-[calc(100vw-3rem)]"
+            className="fixed bottom-6 left-6 z-50 w-96 max-w-[calc(100vw-3rem)]"
           >
             <div className={`
               rounded-2xl overflow-hidden

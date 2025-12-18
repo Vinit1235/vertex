@@ -117,7 +117,7 @@ export default function MusicPlayer() {
       <motion.button
         onClick={() => setIsOpen(true)}
         className={`
-          fixed bottom-24 right-6 z-50 w-12 h-12 rounded-full
+          fixed bottom-24 left-6 z-50 w-12 h-12 rounded-full
           ${isUpsideDown ? 'bg-red-900/80' : 'bg-slate-800/80'}
           backdrop-blur-sm border border-red-500/30
           flex items-center justify-center
@@ -147,7 +147,7 @@ export default function MusicPlayer() {
           initial={{ opacity: 0, y: 50, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 50, scale: 0.9 }}
-          className="fixed bottom-40 right-6 z-50 w-80"
+          className="fixed bottom-40 left-6 z-50 w-80"
         >
           <div className={`
             rounded-xl overflow-hidden

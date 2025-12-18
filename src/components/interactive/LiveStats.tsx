@@ -94,7 +94,7 @@ export default function LiveStats() {
       <motion.button
         onClick={() => setIsVisible(!isVisible)}
         className={`
-          fixed left-6 bottom-24 z-50 w-12 h-12 rounded-full
+          fixed left-6 bottom-56 z-50 w-12 h-12 rounded-full
           ${isUpsideDown ? 'bg-red-900/80' : 'bg-slate-800/80'}
           backdrop-blur-sm border border-red-500/30
           flex items-center justify-center
@@ -113,7 +113,7 @@ export default function LiveStats() {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -50 }}
-          className="fixed left-6 bottom-40 z-50"
+          className="fixed left-6 bottom-72 z-50"
         >
           <div className={`
             rounded-xl overflow-hidden w-72
