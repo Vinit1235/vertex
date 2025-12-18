@@ -5,6 +5,7 @@ import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import GradientText from './ui/GradientText';
 import LoginPage from './LoginPage';
+import logo from '../images/logo.png';
 
 const navLinks = [
   { name: 'About', href: '#about' },
@@ -53,9 +54,7 @@ export default function Navbar() {
               className="flex items-center gap-2 group"
               whileHover={{ scale: 1.05 }}
             >
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center shadow-neon">
-                <span className="text-white font-bold text-lg">V</span>
-              </div>
+              <img src={logo} alt="VORTEX Logo" className="w-10 h-10 rounded-full object-cover shadow-neon" />
               <GradientText
                 colors={['#FF0000', '#FF4444', '#FF0000', '#CC0000', '#FF0000']}
                 animationSpeed={4}
