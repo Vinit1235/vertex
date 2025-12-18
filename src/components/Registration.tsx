@@ -31,7 +31,7 @@ interface FormData {
 }
 
 export default function Registration() {
-  const { isUpsideDown, unlockAchievement } = useTheme();
+  const { unlockAchievement } = useTheme();
   const { register: authRegister } = useAuth();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -171,11 +171,7 @@ export default function Registration() {
   return (
     <section id="register" className="py-24 relative overflow-hidden">
       {/* Background */}
-      <div className={`absolute inset-0 ${
-        isUpsideDown 
-          ? 'bg-gradient-to-b from-transparent via-red-950/20 to-transparent' 
-          : 'bg-gradient-to-b from-transparent via-slate-800/30 to-transparent'
-      }`} />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-800/30 to-transparent" />
 
       <div className="max-w-4xl mx-auto px-4 relative z-10" ref={ref}>
         {/* Section Header */}

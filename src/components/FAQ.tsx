@@ -3,10 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { ChevronDown } from 'lucide-react';
 import { FAQ_DATA } from '../data/eventData';
-import { useTheme } from '../context/ThemeContext';
-
 export default function FAQ() {
-  const { isUpsideDown } = useTheme();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
 
@@ -14,7 +11,7 @@ export default function FAQ() {
     <section id="faq" className="py-24 relative overflow-hidden">
       {/* Background */}
       <div className={`absolute inset-0 ${
-        isUpsideDown ? 'bg-red-950/5' : 'bg-slate-900/30'
+        'bg-slate-900/30'
       }`} />
 
       <div className="max-w-3xl mx-auto px-4 relative z-10" ref={ref}>

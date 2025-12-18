@@ -32,30 +32,37 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
     'WELCOME TO VORTEX'
   ];
 
-  // Cinematic Intro
+  // Cinematic Intro - Fixed version
   useEffect(() => {
     if (!showIntro) return;
     
-    let lineIndex = 0;
-    let charIndex = 0;
+    let currentLine = 0;
+    let currentChar = 0;
+    let isPaused = false;
     
     const typeWriter = setInterval(() => {
-      if (lineIndex < introLines.length) {
-        const currentLine = introLines[lineIndex];
-        if (charIndex <= currentLine.length) {
-          setIntroText(currentLine.slice(0, charIndex));
-          charIndex++;
-        } else {
-          // Pause between lines
-          setTimeout(() => {
-            lineIndex++;
-            charIndex = 0;
-            setIntroText('');
-          }, 800);
-        }
-      } else {
+      if (isPaused) return;
+      
+      if (currentLine >= introLines.length) {
         clearInterval(typeWriter);
         setTimeout(() => setShowIntro(false), 500);
+        return;
+      }
+      
+      const line = introLines[currentLine];
+      
+      if (currentChar <= line.length) {
+        setIntroText(line.slice(0, currentChar));
+        currentChar++;
+      } else {
+        // Pause and move to next line
+        isPaused = true;
+        setTimeout(() => {
+          currentLine++;
+          currentChar = 0;
+          setIntroText('');
+          isPaused = false;
+        }, 800);
       }
     }, 80);
 

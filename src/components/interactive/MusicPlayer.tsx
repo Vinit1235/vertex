@@ -1,36 +1,114 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useTheme } from '../../context/ThemeContext';
 import { Music, Volume2, VolumeX, Radio, Play, Pause, SkipForward, SkipBack } from 'lucide-react';
 
-// 80s themed playlist (just UI, no actual audio)
-const PLAYLIST = [
-  { id: 1, title: "Should I Stay or Should I Go", artist: "The Clash", duration: "3:08" },
-  { id: 2, title: "Running Up That Hill", artist: "Kate Bush", duration: "4:58" },
-  { id: 3, title: "Africa", artist: "Toto", duration: "4:55" },
-  { id: 4, title: "Every Breath You Take", artist: "The Police", duration: "4:14" },
-  { id: 5, title: "Hazy Shade of Winter", artist: "The Bangles", duration: "3:10" },
-  { id: 6, title: "Pass the Dutchie", artist: "Musical Youth", duration: "3:45" },
-  { id: 7, title: "Atmosphere", artist: "Joy Division", duration: "4:10" },
-  { id: 8, title: "Heroes", artist: "Peter Gabriel", duration: "6:11" },
+// Radio stations with streaming URLs
+const RADIO_STATIONS = [
+  { id: 1, title: "80s Hits Radio", artist: "RetroFM", url: "https://streams.ilovemusic.de/iloveradio8.mp3" },
+  { id: 2, title: "Classic Rock Radio", artist: "RockFM", url: "https://streams.ilovemusic.de/iloveradio16.mp3" },
+  { id: 3, title: "Synthwave FM", artist: "Nightride.fm", url: "https://stream.nightride.fm/nightride.m4a" },
+  { id: 4, title: "Chillsynth", artist: "Nightride.fm", url: "https://stream.nightride.fm/chillsynth.m4a" },
+  { id: 5, title: "Lo-Fi Radio", artist: "LoFi Beats", url: "https://streams.ilovemusic.de/iloveradio17.mp3" },
 ];
 
 export default function MusicPlayer() {
   const { isUpsideDown } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTrack, setCurrentTrack] = useState(0);
+  const [currentStation, setCurrentStation] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
-  const [progress, setProgress] = useState(35);
+  const [volume, setVolume] = useState(0.7);
+  const [isLoading, setIsLoading] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Initialize audio element
+  useEffect(() => {
+    audioRef.current = new Audio();
+    audioRef.current.volume = volume;
+    
+    audioRef.current.addEventListener('playing', () => {
+      setIsLoading(false);
+      setIsPlaying(true);
+    });
+    
+    audioRef.current.addEventListener('waiting', () => {
+      setIsLoading(true);
+    });
+    
+    audioRef.current.addEventListener('error', () => {
+      setIsLoading(false);
+      setIsPlaying(false);
+    });
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
+
+  // Handle play/pause
+  const togglePlay = async () => {
+    if (!audioRef.current) return;
+    
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      setIsLoading(true);
+      audioRef.current.src = RADIO_STATIONS[currentStation].url;
+      try {
+        await audioRef.current.play();
+      } catch (err) {
+        console.log('Playback failed:', err);
+        setIsLoading(false);
+      }
+    }
+  };
+
+  // Change station
+  const changeStation = async (index: number) => {
+    if (!audioRef.current) return;
+    setCurrentStation(index);
+    
+    if (isPlaying) {
+      setIsLoading(true);
+      audioRef.current.src = RADIO_STATIONS[index].url;
+      try {
+        await audioRef.current.play();
+      } catch (err) {
+        console.log('Playback failed:', err);
+        setIsLoading(false);
+      }
+    }
+  };
 
   const handleNext = () => {
-    setCurrentTrack((prev) => (prev + 1) % PLAYLIST.length);
-    setProgress(0);
+    const nextIndex = (currentStation + 1) % RADIO_STATIONS.length;
+    changeStation(nextIndex);
   };
 
   const handlePrev = () => {
-    setCurrentTrack((prev) => (prev - 1 + PLAYLIST.length) % PLAYLIST.length);
-    setProgress(0);
+    const prevIndex = (currentStation - 1 + RADIO_STATIONS.length) % RADIO_STATIONS.length;
+    changeStation(prevIndex);
+  };
+
+  // Handle volume change
+  const handleVolumeChange = (newVolume: number) => {
+    setVolume(newVolume);
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume;
+    }
+  };
+
+  // Handle mute toggle
+  const toggleMute = () => {
+    if (audioRef.current) {
+      audioRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
   };
 
   return (
@@ -112,26 +190,17 @@ export default function MusicPlayer() {
             {/* Current Track */}
             <div className="p-4">
               <h4 className="text-white font-bold truncate">
-                {PLAYLIST[currentTrack].title}
+                {RADIO_STATIONS[currentStation].title}
               </h4>
               <p className="text-gray-400 text-sm">
-                {PLAYLIST[currentTrack].artist}
+                {RADIO_STATIONS[currentStation].artist}
               </p>
 
-              {/* Progress Bar */}
-              <div className="mt-4">
-                <div className="h-1 bg-gray-700 rounded-full overflow-hidden">
-                  <motion.div
-                    className="h-full bg-gradient-to-r from-red-600 to-red-400"
-                    animate={isPlaying ? { width: ['0%', '100%'] } : {}}
-                    transition={{ duration: 180, ease: 'linear' }}
-                    style={{ width: `${progress}%` }}
-                  />
-                </div>
-                <div className="flex justify-between text-xs text-gray-500 mt-1">
-                  <span>1:05</span>
-                  <span>{PLAYLIST[currentTrack].duration}</span>
-                </div>
+              {/* Live Indicator */}
+              <div className="mt-4 flex items-center gap-2">
+                <div className={`w-2 h-2 rounded-full ${isPlaying ? 'bg-red-500 animate-pulse' : 'bg-gray-500'}`} />
+                <span className="text-xs text-gray-400">{isPlaying ? 'LIVE' : 'OFFLINE'}</span>
+                {isLoading && <span className="text-xs text-yellow-400">Loading...</span>}
               </div>
 
               {/* Controls */}
@@ -144,8 +213,9 @@ export default function MusicPlayer() {
                 </button>
                 
                 <button
-                  onClick={() => setIsPlaying(!isPlaying)}
-                  className="w-12 h-12 rounded-full bg-gradient-to-r from-red-600 to-red-500 flex items-center justify-center hover:scale-105 transition-transform"
+                  onClick={togglePlay}
+                  disabled={isLoading}
+                  className="w-12 h-12 rounded-full bg-gradient-to-r from-red-600 to-red-500 flex items-center justify-center hover:scale-105 transition-transform disabled:opacity-50"
                 >
                   {isPlaying ? (
                     <Pause className="w-6 h-6 text-white" />
@@ -164,36 +234,39 @@ export default function MusicPlayer() {
 
               {/* Volume */}
               <div className="flex items-center gap-2 mt-4">
-                <button onClick={() => setIsMuted(!isMuted)}>
+                <button onClick={toggleMute}>
                   {isMuted ? (
                     <VolumeX className="w-4 h-4 text-gray-400" />
                   ) : (
                     <Volume2 className="w-4 h-4 text-gray-400" />
                   )}
                 </button>
-                <div className="flex-1 h-1 bg-gray-700 rounded-full overflow-hidden">
-                  <div className="h-full bg-red-500 w-3/4" />
-                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.1"
+                  value={volume}
+                  onChange={(e) => handleVolumeChange(parseFloat(e.target.value))}
+                  className="flex-1 h-1 bg-gray-700 rounded-full appearance-none cursor-pointer accent-red-500"
+                />
               </div>
             </div>
 
-            {/* Playlist */}
+            {/* Station List */}
             <div className="border-t border-red-900/30 max-h-40 overflow-y-auto">
-              {PLAYLIST.map((track, index) => (
+              {RADIO_STATIONS.map((station, index) => (
                 <button
-                  key={track.id}
-                  onClick={() => {
-                    setCurrentTrack(index);
-                    setProgress(0);
-                  }}
+                  key={station.id}
+                  onClick={() => changeStation(index)}
                   className={`
                     w-full px-4 py-2 flex items-center justify-between text-left
                     hover:bg-red-900/20 transition-colors
-                    ${index === currentTrack ? 'bg-red-900/30' : ''}
+                    ${index === currentStation ? 'bg-red-900/30' : ''}
                   `}
                 >
                   <div className="flex items-center gap-3">
-                    {index === currentTrack && isPlaying ? (
+                    {index === currentStation && isPlaying ? (
                       <motion.div
                         className="w-4 flex items-end gap-0.5"
                         animate={{ opacity: [1, 0.5, 1] }}
@@ -204,16 +277,15 @@ export default function MusicPlayer() {
                         ))}
                       </motion.div>
                     ) : (
-                      <span className="text-gray-500 text-xs w-4">{index + 1}</span>
+                      <Radio className="w-4 h-4 text-gray-500" />
                     )}
                     <div>
-                      <p className={`text-sm ${index === currentTrack ? 'text-red-400' : 'text-white'}`}>
-                        {track.title}
+                      <p className={`text-sm ${index === currentStation ? 'text-red-400' : 'text-white'}`}>
+                        {station.title}
                       </p>
-                      <p className="text-xs text-gray-500">{track.artist}</p>
+                      <p className="text-xs text-gray-500">{station.artist}</p>
                     </div>
                   </div>
-                  <span className="text-xs text-gray-500">{track.duration}</span>
                 </button>
               ))}
             </div>

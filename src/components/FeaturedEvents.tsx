@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, MapPin, Users, ArrowRight, Trophy, Code, Mic, Gamepad2, Music, Laptop } from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
+// Theme toggle only affects Hero section
 
 interface FeaturedEvent {
   id: number;
@@ -115,7 +115,7 @@ const FEATURED_EVENTS: FeaturedEvent[] = [
 const categoryFilters = ['All', 'Coding', 'ML Competition', 'Cybersecurity', 'Speaker Session', 'Gaming', 'Cultural'];
 
 export default function FeaturedEvents() {
-  const { isUpsideDown } = useTheme();
+  // Theme toggle only affects Hero section
   const [activeFilter, setActiveFilter] = useState('All');
 
   const filteredEvents = activeFilter === 'All' 
@@ -124,12 +124,12 @@ export default function FeaturedEvents() {
 
   return (
     <section id="events" className={`py-20 relative overflow-hidden ${
-      isUpsideDown ? 'bg-black' : 'bg-slate-950'
+      'bg-slate-950'
     }`}>
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, ${isUpsideDown ? '#ff0000' : '#ffffff'} 1px, transparent 0)`,
+          backgroundImage: `radial-gradient(circle at 2px 2px, #ffffff 1px, transparent 0)`,
           backgroundSize: '40px 40px'
         }} />
       </div>

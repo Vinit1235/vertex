@@ -4,6 +4,7 @@ import { Calendar, MapPin, ChevronDown, Users, Trophy, Clock, ArrowRight, Zap } 
 import { EVENT_CONFIG, HIGHLIGHTS } from '../data/eventData';
 import { useTheme } from '../context/ThemeContext';
 import GradientText from './ui/GradientText';
+import bgImage from '../images/bg image.png';
 
 export default function Hero() {
   const { isUpsideDown, unlockAchievement } = useTheme();
@@ -58,15 +59,23 @@ export default function Hero() {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated Background */}
+      {/* Background Image */}
       <div className="absolute inset-0">
-        {/* Gradient Base */}
+        <img 
+          src={bgImage} 
+          alt="Background" 
+          className="w-full h-full object-cover"
+        />
+        {/* Dark Overlay */}
         <div className={`absolute inset-0 transition-all duration-1000 ${
           isUpsideDown 
-            ? 'bg-gradient-to-br from-black via-red-950/50 to-black' 
-            : 'bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950'
+            ? 'bg-black/70' 
+            : 'bg-slate-950/60'
         }`} />
-        
+      </div>
+
+      {/* Animated Background Effects */}
+      <div className="absolute inset-0 pointer-events-none">
         {/* Grid Pattern */}
         <div 
           className="absolute inset-0 opacity-[0.03]"

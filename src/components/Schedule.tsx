@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { SCHEDULE } from '../data/eventData';
-import { useTheme } from '../context/ThemeContext';
 
 const typeColors: Record<string, string> = {
   registration: 'bg-green-500',
@@ -25,18 +24,13 @@ const typeIcons: Record<string, string> = {
 };
 
 export default function Schedule() {
-  const { isUpsideDown } = useTheme();
   const [activeDay, setActiveDay] = useState(0);
   const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
 
   return (
     <section id="schedule" className="py-24 relative overflow-hidden">
       {/* Background */}
-      <div className={`absolute inset-0 ${
-        isUpsideDown 
-          ? 'bg-gradient-to-b from-transparent via-red-950/10 to-transparent' 
-          : 'bg-gradient-to-b from-transparent via-slate-800/30 to-transparent'
-      }`} />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-800/30 to-transparent" />
 
       <div className="max-w-5xl mx-auto px-4 relative z-10" ref={ref}>
         {/* Section Header */}

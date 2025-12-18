@@ -2,17 +2,14 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Twitter, Linkedin } from 'lucide-react';
 import { SPEAKERS } from '../data/eventData';
-import { useTheme } from '../context/ThemeContext';
-
 export default function Speakers() {
-  const { isUpsideDown } = useTheme();
   const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
 
   return (
     <section id="speakers" className="py-24 relative overflow-hidden">
       {/* Background */}
       <div className={`absolute inset-0 ${
-        isUpsideDown ? 'bg-red-950/5' : 'bg-slate-900/30'
+        'bg-slate-900/30'
       }`} />
 
       <div className="max-w-7xl mx-auto px-4 relative z-10" ref={ref}>

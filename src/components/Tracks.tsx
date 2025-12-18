@@ -3,10 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { ChevronRight } from 'lucide-react';
 import { TRACKS } from '../data/eventData';
-import { useTheme } from '../context/ThemeContext';
-
 export default function Tracks() {
-  const { isUpsideDown } = useTheme();
   const [selectedTrack, setSelectedTrack] = useState<number | null>(null);
   const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
 
@@ -19,8 +16,8 @@ export default function Tracks() {
             0deg,
             transparent,
             transparent 50px,
-            ${isUpsideDown ? '#FF0000' : '#00BFFF'} 50px,
-            ${isUpsideDown ? '#FF0000' : '#00BFFF'} 51px
+            #00BFFF 50px,
+            #00BFFF 51px
           )`
         }} />
       </div>

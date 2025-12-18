@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
+// Theme toggle only affects Hero section
 
 // Import images
 import eventImg1 from '../images/Gemini_Generated_Image_6gu0cw6gu0cw6gu0.png';
@@ -78,7 +78,7 @@ const galleryImages: GalleryImage[] = [
 ];
 
 export default function Gallery() {
-  const { isUpsideDown } = useTheme();
+  // Theme toggle only affects Hero section
   const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
   const [filter, setFilter] = useState<string>('all');
@@ -100,7 +100,7 @@ export default function Gallery() {
   return (
     <section id="gallery" className="py-24 relative overflow-hidden">
       <div className={`absolute inset-0 ${
-        isUpsideDown ? 'bg-red-950/5' : 'bg-slate-900/30'
+        'bg-slate-900/30'
       }`} />
 
       <div className="max-w-7xl mx-auto px-4 relative z-10" ref={ref}>

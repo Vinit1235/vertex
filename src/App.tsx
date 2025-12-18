@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { ThemeProvider, useTheme } from './context/ThemeContext';
+import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider } from './context/AuthContext';
 
 // Components
@@ -38,7 +38,7 @@ import SecretPortal from './components/interactive/SecretPortal';
 import LightWall from './components/interactive/LightWall';
 
 function AppContent() {
-  const { isUpsideDown } = useTheme();
+  // Theme toggle only affects Hero section now
   const [isLoading, setIsLoading] = useState(true);
   const [showCharacterSelect, setShowCharacterSelect] = useState(false);
 
@@ -63,11 +63,7 @@ function AppContent() {
   };
 
   return (
-    <div className={`min-h-screen transition-all duration-1000 ${
-      isUpsideDown 
-        ? 'bg-upside-gradient' 
-        : 'bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900'
-    }`}>
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
       {/* Loading Screen */}
       <AnimatePresence>
         {isLoading && (

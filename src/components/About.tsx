@@ -1,10 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { HIGHLIGHTS, WHO_IS_THIS_FOR } from '../data/eventData';
-import { useTheme } from '../context/ThemeContext';
-
 export default function About() {
-  const { isUpsideDown } = useTheme();
   const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
 
   const containerVariants = {
@@ -24,7 +21,7 @@ export default function About() {
     <section id="about" className="py-24 relative overflow-hidden">
       {/* Background */}
       <div className={`absolute inset-0 transition-colors duration-500 ${
-        isUpsideDown ? 'bg-red-950/10' : 'bg-slate-900/50'
+        'bg-slate-900/50'
       }`} />
 
       <div className="max-w-7xl mx-auto px-4 relative z-10" ref={ref}>
@@ -89,9 +86,7 @@ export default function About() {
                 whileHover={{ y: -10 }}
               >
                 {/* Hover Glow */}
-                <div className={`absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity ${
-                  isUpsideDown ? 'bg-red-500' : 'bg-blue-500'
-                }`} />
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity bg-blue-500" />
                 
                 <div className="text-5xl mb-4">{item.icon}</div>
                 <h4 className="text-xl font-bold text-white mb-3">{item.title}</h4>

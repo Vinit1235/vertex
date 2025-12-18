@@ -9,7 +9,7 @@ const christmasLightColors = [
 ];
 
 export default function Footer() {
-  const { isUpsideDown, addSecret } = useTheme();
+  const { addSecret } = useTheme();
   const [clickCount, setClickCount] = useState(0);
 
   // Easter egg: Click logo 5 times
@@ -73,9 +73,7 @@ export default function Footer() {
       {/* Wire connecting lights */}
       <div className="absolute top-3 left-0 right-0 h-0.5 bg-gray-700" />
 
-      <div className={`absolute inset-0 ${
-        isUpsideDown ? 'bg-red-950/20' : 'bg-slate-900/50'
-      }`} />
+      <div className="absolute inset-0 bg-slate-900/50" />
 
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         {/* Main Footer Content */}

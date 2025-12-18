@@ -1,10 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { SPONSORS } from '../data/eventData';
-import { useTheme } from '../context/ThemeContext';
-
 export default function Sponsors() {
-  const { isUpsideDown } = useTheme();
   const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
 
   const renderSponsorTier = (sponsors: typeof SPONSORS.title, tierName: string, size: string) => (
@@ -39,11 +36,7 @@ export default function Sponsors() {
   return (
     <section id="sponsors" className="py-24 relative overflow-hidden">
       {/* Background */}
-      <div className={`absolute inset-0 ${
-        isUpsideDown 
-          ? 'bg-gradient-to-b from-transparent via-red-950/10 to-transparent' 
-          : 'bg-gradient-to-b from-transparent via-slate-800/30 to-transparent'
-      }`} />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-800/30 to-transparent" />
 
       <div className="max-w-6xl mx-auto px-4 relative z-10" ref={ref}>
         {/* Section Header */}
