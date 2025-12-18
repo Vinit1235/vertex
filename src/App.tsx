@@ -32,6 +32,7 @@ import WalkieTalkie from './components/interactive/WalkieTalkie';
 import CharacterSelect from './components/interactive/CharacterSelect';
 import AchievementToast from './components/interactive/AchievementToast';
 import MusicPlayer from './components/interactive/MusicPlayer';
+import ChatBot from './components/interactive/ChatBot';
 import LiveStats from './components/interactive/LiveStats';
 import FloatingNav from './components/interactive/FloatingNav';
 import SecretPortal from './components/interactive/SecretPortal';
@@ -106,6 +107,7 @@ function AppContent() {
           <DemogorgonHunt />
           <WalkieTalkie />
           <MusicPlayer />
+          <ChatBot />
           <LiveStats />
           <FloatingNav />
           <AchievementToast />
