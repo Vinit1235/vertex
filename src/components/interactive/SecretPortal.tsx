@@ -12,7 +12,7 @@ const SECRET_LOCATIONS = [
 ];
 
 export default function SecretPortal() {
-  const { secretsFound, isUpsideDown } = useTheme();
+  const { secretsFound } = useTheme();
   const [showSecret, setShowSecret] = useState(false);
   const [currentSecret, setCurrentSecret] = useState<typeof SECRET_LOCATIONS[0] | null>(null);
   const [portalClicks, setPortalClicks] = useState(0);

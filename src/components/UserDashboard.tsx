@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
@@ -6,17 +6,11 @@ import GradientText from './ui/GradientText';
 import { 
   User, 
   Mail, 
-  Phone, 
-  School, 
-  Calendar, 
   Users, 
-  Code, 
   Trophy,
-  Settings,
   Edit2,
   Save,
   X,
-  Check,
   Ticket
 } from 'lucide-react';
 

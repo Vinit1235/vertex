@@ -50,7 +50,7 @@ const characters = [
 ];
 
 export default function WalkieTalkie() {
-  const { isUpsideDown, addSecret } = useTheme();
+  const { addSecret } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputText, setInputText] = useState('');

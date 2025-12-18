@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Github, Twitter, Instagram, Linkedin, Mail, MapPin, Heart } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';

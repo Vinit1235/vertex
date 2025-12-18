@@ -12,7 +12,7 @@ interface Demogorgon {
 }
 
 export default function DemogorgonHunt() {
-  const { isUpsideDown, unlockAchievement, addSecret } = useTheme();
+  const { unlockAchievement, addSecret } = useTheme();
   const [isPlaying, setIsPlaying] = useState(false);
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
