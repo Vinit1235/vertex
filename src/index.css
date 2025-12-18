@@ -1,0 +1,369 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Stranger Things Font Face */
+@font-face {
+  font-family: 'ITC Benguiat';
+  src: local('Georgia');
+  font-weight: bold;
+}
+
+/* Base Styles */
+:root {
+  --color-hawkins-red: #8B0000;
+  --color-neon-red: #FF0000;
+  --color-upside-down: #1a0a0a;
+  --color-portal-blue: #00BFFF;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #0a0a0a;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* Stranger Things Title Style */
+.stranger-title {
+  font-family: 'ITC Benguiat', Georgia, serif;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #FF0000;
+  text-shadow: 
+    0 0 10px #FF0000,
+    0 0 20px #FF0000,
+    0 0 30px #FF0000,
+    0 0 40px #8B0000;
+}
+
+/* Glassmorphism */
+.glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-dark {
+  background: linear-gradient(135deg, rgba(139, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.3) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 0, 0, 0.15);
+}
+
+/* CRT Scanline Effect */
+.crt-overlay {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  z-index: 9999;
+  opacity: 0.3;
+}
+
+/* Upside Down Theme */
+.upside-down {
+  filter: hue-rotate(180deg) saturate(0.5);
+  background: linear-gradient(180deg, #0a0505 0%, #150808 50%, #1a0a0a 100%);
+}
+
+.upside-down-active {
+  animation: upside-transition 0.5s ease-in-out;
+}
+
+@keyframes upside-transition {
+  0% { filter: none; transform: rotateX(0deg); }
+  50% { filter: blur(10px); transform: rotateX(90deg); }
+  100% { filter: hue-rotate(180deg) saturate(0.5); transform: rotateX(180deg); }
+}
+
+/* Floating Particles */
+.particle {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+/* Glitch Effect */
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -2px 0 #00BFFF;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: -2px 0 #FF0000;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(31px, 9999px, 94px, 0); }
+  10% { clip: rect(112px, 9999px, 76px, 0); }
+  20% { clip: rect(85px, 9999px, 77px, 0); }
+  30% { clip: rect(27px, 9999px, 97px, 0); }
+  40% { clip: rect(64px, 9999px, 98px, 0); }
+  50% { clip: rect(61px, 9999px, 85px, 0); }
+  60% { clip: rect(99px, 9999px, 114px, 0); }
+  70% { clip: rect(34px, 9999px, 115px, 0); }
+  80% { clip: rect(98px, 9999px, 129px, 0); }
+  90% { clip: rect(43px, 9999px, 96px, 0); }
+  100% { clip: rect(82px, 9999px, 69px, 0); }
+}
+
+@keyframes glitch-anim2 {
+  0% { clip: rect(129px, 9999px, 36px, 0); }
+  10% { clip: rect(36px, 9999px, 4px, 0); }
+  20% { clip: rect(85px, 9999px, 66px, 0); }
+  30% { clip: rect(91px, 9999px, 91px, 0); }
+  40% { clip: rect(148px, 9999px, 138px, 0); }
+  50% { clip: rect(38px, 9999px, 122px, 0); }
+  60% { clip: rect(69px, 9999px, 54px, 0); }
+  70% { clip: rect(98px, 9999px, 71px, 0); }
+  80% { clip: rect(146px, 9999px, 34px, 0); }
+  90% { clip: rect(134px, 9999px, 43px, 0); }
+  100% { clip: rect(102px, 9999px, 80px, 0); }
+}
+
+/* Neon Button */
+.neon-button {
+  position: relative;
+  padding: 12px 36px;
+  color: #FF0000;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-weight: 600;
+  border: 2px solid #FF0000;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.neon-button:hover {
+  color: #fff;
+  background: #FF0000;
+  box-shadow: 
+    0 0 10px #FF0000,
+    0 0 40px #FF0000,
+    0 0 80px #FF0000;
+}
+
+.neon-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.5s;
+}
+
+.neon-button:hover::before {
+  left: 100%;
+}
+
+/* Christmas Lights */
+.christmas-light {
+  width: 12px;
+  height: 18px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  position: relative;
+}
+
+.christmas-light::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 6px;
+  background: #333;
+  border-radius: 2px 2px 0 0;
+}
+
+/* Portal Effect */
+.portal {
+  position: relative;
+  border-radius: 50%;
+  background: radial-gradient(circle, #FF0000 0%, #8B0000 40%, #000 70%);
+  box-shadow: 
+    0 0 60px #FF0000,
+    0 0 100px #8B0000,
+    inset 0 0 60px #000;
+  animation: portal-pulse 3s ease-in-out infinite;
+}
+
+@keyframes portal-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 60px #FF0000, 0 0 100px #8B0000; }
+  50% { transform: scale(1.05); box-shadow: 0 0 80px #FF0000, 0 0 120px #8B0000; }
+}
+
+/* Mind Flayer Tendrils */
+.tendril {
+  position: absolute;
+  width: 3px;
+  background: linear-gradient(to bottom, #4A0E4E, transparent);
+  transform-origin: top center;
+  animation: tendril-wave 4s ease-in-out infinite;
+}
+
+@keyframes tendril-wave {
+  0%, 100% { transform: rotate(-15deg) scaleY(1); }
+  50% { transform: rotate(15deg) scaleY(1.2); }
+}
+
+/* Lightning Flash */
+.lightning-flash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 9998;
+}
+
+/* Retro Input */
+.retro-input {
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid #FF0000;
+  color: #fff;
+  padding: 12px 16px;
+  font-family: 'VT323', monospace;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.retro-input:focus {
+  outline: none;
+  border-color: #FF6666;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+}
+
+.retro-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8B0000;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FF0000;
+}
+
+/* Selection */
+::selection {
+  background: #FF0000;
+  color: #000;
+}
+
+/* Section transitions */
+section {
+  position: relative;
+}
+
+/* Animated underline */
+.animated-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.animated-underline::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 50%;
+  background: #FF0000;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.animated-underline:hover::after {
+  width: 100%;
+}
+
+/* Card hover effect */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(139, 0, 0, 0.3);
+}
+
+/* Loading animation */
+.loading-bar {
+  background: linear-gradient(90deg, #8B0000, #FF0000, #8B0000);
+  background-size: 200% 100%;
+  animation: loading-gradient 2s linear infinite;
+}
+
+@keyframes loading-gradient {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .stranger-title {
+    font-size: 2rem;
+    letter-spacing: 0.1em;
+  }
+}
