@@ -106,7 +106,7 @@ export const SPEAKERS = [
     role: "AI Research Lead",
     company: "DeepMind",
     topic: "Neural Networks & The Unknown",
-    image: "/src/images/mentor/download.jpg",
+    image: new URL('../images/mentor/download.jpg', import.meta.url).href,
     social: { twitter: "#", linkedin: "#" }
   },
   {
@@ -115,7 +115,7 @@ export const SPEAKERS = [
     role: "Blockchain Architect",
     company: "Ethereum Foundation",
     topic: "Decentralized Dimensions",
-    image: "/src/images/mentor/images.jpg",
+    image: new URL('../images/mentor/images.jpg', import.meta.url).href,
     social: { twitter: "#", linkedin: "#" }
   },
   {
@@ -124,7 +124,7 @@ export const SPEAKERS = [
     role: "Cybersecurity Expert",
     company: "CrowdStrike",
     topic: "Defending Against Shadow Threats",
-    image: "/src/images/mentor/images (1).jpg",
+    image: new URL('../images/mentor/images (1).jpg', import.meta.url).href,
     social: { twitter: "#", linkedin: "#" }
   },
   {
@@ -133,7 +133,7 @@ export const SPEAKERS = [
     role: "Neuroscience Professor",
     company: "MIT Media Lab",
     topic: "Brain-Computer Interfaces",
-    image: "/src/images/mentor/images (2).jpg",
+    image: new URL('../images/mentor/images (2).jpg', import.meta.url).href,
     social: { twitter: "#", linkedin: "#" }
   },
   {
@@ -142,7 +142,7 @@ export const SPEAKERS = [
     role: "VR/AR Developer",
     company: "Meta Reality Labs",
     topic: "Building the Metaverse",
-    image: "/src/images/mentor/images (3).jpg",
+    image: new URL('../images/mentor/images (3).jpg', import.meta.url).href,
     social: { twitter: "#", linkedin: "#" }
   },
   {
@@ -151,7 +151,7 @@ export const SPEAKERS = [
     role: "IoT Pioneer",
     company: "Arduino",
     topic: "Connected Everything",
-    image: "/src/images/mentor/download.jpg",
+    image: new URL('../images/mentor/download.jpg', import.meta.url).href,
     social: { twitter: "#", linkedin: "#" }
   }
 ];
